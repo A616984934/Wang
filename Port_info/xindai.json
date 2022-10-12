@@ -1,0 +1,696 @@
+{
+  "desc": "params中is字段需要重新组装数据标识",
+  "reset_pwd_sms": {
+    "desc": "发送重置密码验证码",
+    "type": "POST",
+    "url": "/v4/verification-code/reset-password",
+    "header": {
+      "is": true,
+      "Content-Type": "application/json",
+      "app-name": "{}",
+      "source-type": "client",
+      "os": "ios"
+    },
+    "params": {
+      "is": true,
+      "mobile": "{}",
+      "message_type": "sms"
+    }
+  },
+  "var-pwd-code": {
+    "desc": "确认密码短信验证码",
+    "type": "POST",
+    "url": "/v4/verification-code/validate-reset-password",
+    "header": {
+      "is": true,
+      "Content-Type": "application/json",
+      "app-name": "{}",
+      "source-type": "client",
+      "os": "ios"
+    },
+    "params": {
+      "is": true,
+      "mobile": "{}",
+      "verification_code": "1234"
+    }
+  },
+  "set_password": {
+    "desc": "设置密码",
+    "type": "POST",
+    "url": "/v4/user/reset-password",
+    "header": {
+      "is": true,
+      "Content-Type": "application/json",
+      "app-name": "{}",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "40301",
+      "from": "ios",
+      "jwt-token": "{}"
+    },
+    "params": {
+      "is": true,
+      "mobile": "{}",
+      "password": "{}"
+    }
+  },
+
+  "get_account_salt": {
+    "desc": "获取密码salt",
+    "type": "POST",
+    "url": "/v4/user/get-account-salt",
+    "header": {
+      "is": true,
+      "Content-Type": "application/json",
+      "app-name": "{}",
+      "source-type": "client",
+      "os": "ios"
+    },
+    "params": {
+      "is": true,
+      "mobile": "{}"
+    }
+  },
+  "login-by-sms": {
+    "desc": "登录",
+    "type": "POST",
+    "url": "/v4/user/login-by-sms",
+    "header": {
+      "is": true,
+      "Content-Type": "application/json",
+      "APP-NAME": "xyf-01",
+      "Source-Type": "client",
+      "os": "ios",
+      "version-code": "50106",
+      "from": "ios"
+    },
+    "params": {
+      "is": true,
+      "mobile": "{}",
+      "sms_code": "1234"
+    }
+  },
+  "get-login-sms": {
+    "desc": "发送短信",
+    "type": "POST",
+    "url": "/v4/verification-code/get-login-sms",
+    "header": {
+      "is": true,
+      "Content-Type": "application/json",
+      "APP-NAME": "xyf-01",
+      "Source-Type": "client",
+      "os": "ios",
+      "version-code": "40801",
+      "from": "ios"
+    },
+    "params": {
+      "is": true,
+      "mobile": "{}"
+    }
+  },
+  "get_token": {
+    "desc": "获取token",
+    "type": "POST",
+    "url": "/user/get-token",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}"
+    },
+    "params": {
+      "is": true,
+      "appid": "{}",
+      "mobile": "{}",
+      "sign": "{}"
+    }
+  },
+  "create-card-record": {
+    "desc": "创建身份证order",
+    "type": "POST",
+    "url": "/before/ocr/create-record",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {}
+  },
+  "upload_challenge_file_card": {
+    "desc": "上传idcard照片",
+    "type": "POST",
+    "upload": true,
+    "url": "/before/upload-challenge-file",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "{}",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "is": true,
+      "form-data": true,
+      "file_type": "ocr",
+      "order_id": "{}",
+      "front_photo": "{}",
+      "back_photo": "{}",
+      "head_photo": "{}"
+    }
+  },
+  "create-face-record": {
+    "desc": "创建face order",
+    "type": "GET",
+    "url": "/before/face/create-record",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {}
+  },
+  "upload_challenge_file_face": {
+    "desc": "上传face照片",
+    "type": "POST",
+    "upload": true,
+    "url": "/before/upload-challenge-file",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "{}",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "is": true,
+      "form-data": true,
+      "file_type": "face",
+      "delta": "300",
+      "order_id": "{}",
+      "best_image": "{}",
+      "fake_image": "{}",
+      "action_image1": "{}",
+      "action_image2": "{}",
+      "action_image3": "{}"
+    }
+  },
+  "submit_card_info": {
+    "desc": "提交ocr识别身份证信息-ocr识别信息和本次上传证件信息一致",
+    "type": "POST",
+    "url": "/before/apply",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "is": true,
+      "name": "徐海琴",
+      "id_card_number": "{}",
+      "mobile": "{}",
+      "source_type": "wap"
+    }
+  },
+  "submit_person_info": {
+    "desc": "提交个人信息-学历-公司-薪资等",
+    "type": "POST",
+    "url": "/before/challenge/report",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "challenge_item": "base_info",
+      "challenge_info": {
+        "education": "博士及以上",
+        "job": "事业单位",
+        "company_district_code": "110101",
+        "address": "北京市 - 市辖区 - 东城区",
+        "company_address": "淮南路188号",
+        "company_name": "呵呵过分",
+        "monthly_income": "10,000~20,000",
+        "marriage": "未婚"
+      }
+    }
+  },
+  "submit_contact_info": {
+    "desc": "提交联系人信息",
+    "type": "POST",
+    "url": "/before/challenge/report",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "challenge_item": "relation",
+      "challenge_info": {
+        "relative": [
+          {
+            "is_fill": false,
+            "number": 0.0,
+            "type": "配偶",
+            "name": "滚滚滚",
+            "mobile": "17787650957"
+          }
+        ],
+        "friend": [
+          {
+            "is_fill": false,
+            "number": 0.0,
+            "type": "同事",
+            "name": "单身狗",
+            "mobile": "17887650957"
+          },
+          {
+            "is_fill": false,
+            "number": 1.0,
+            "type": "同事",
+            "name": "成功",
+            "mobile": "17899090987"
+          }
+        ]
+      }
+    }
+  },
+  "bind_card_code": {
+    "desc": "绑卡验证码--这步之前替换掉所有身份证",
+    "type": "GET",
+    "url": "/before/bind-card-code",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "bankcard_number": "6212260200044872154",
+      "biz_type": "bind_card"
+    }
+  },
+  "bind_card_submit": {
+    "desc": "绑卡-会写Person表数据",
+    "type": "POST",
+    "url": "/before/bind-card",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "ios",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "bank_name": "工商银行",
+      "type": "bind",
+      "province_name": "北京市",
+      "province_code": "110000",
+      "city_name": "市辖区",
+      "city_code": "110100",
+      "verification_code": "1234",
+      "bankcard_number": "6212260200044872154",
+      "biz_type": "bind_card"
+    }
+  },
+  "gps_info_submit": {
+    "desc": "上报gps",
+    "type": "POST",
+    "url": "/report/event",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "android",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "is": true,
+      "format": true,
+      "data": "[{\"event_type\":\"gps\",\"event_id\":\"1000288\",\"device_id\":\"%s\",\"biz_type\":\"xjd_activation\",\"latitude\":\"31.20083995\",\"event_name\":\"gps\",\"session_id\":\"%s\",\"source_type\":\"android\",\"event_time\":\"%s\",\"longitude\":\"121.4224397\"}]"
+    }
+  },
+  "photo_info_submit": {
+    "desc": "上报相册信息",
+    "type": "POST",
+    "url": "/report/event",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "android",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "is": true,
+      "format": true,
+      "data": "[{\"photo_info\":[{\"date\":\"2021-04-29 17:30:32\",\"source\":\"/storage/emulated/0/DCIM/Screenshots/Screenshot_20210429_173032.jpg\",\"DateTime\":\"2021:04:29 17:30:32\",\"ImageWidth\":\"2340\",\"longitude\":\"\",\"Orientation\":\"0\",\"name\":\"Screenshot_20210429_173032.jpg\",\"latitude\":\"\",\"ImageLength\":\"1080\"}],\"event_id\":\"1002928\",\"device_id\":\"%s\",\"user_id\":\"%s\",\"session_id\":\"%s\",\"source_type\":\"android\",\"event_time\":%s}]"
+    }
+  },
+  "contact_info_submit": {
+    "desc": "上报联系人信息",
+    "type": "POST",
+    "url": "/report/encryption-event",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "android",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "data": "k575+quGSEtc0s+N8TuZf2AZx9AGmo5tX+whSDKnSXhosZFlqFknlJhiyMCqi8OYQW4mPAXai80t0fprsDLBqJvZDjWwOq8w6MuuoQOvpJseQkkI6HGAyFhhGUWR22yneBK9IQ2ejc3O4fnR/tgLFvQDK3VyLntVo++xq42uMru2yAPzO6Wlna0FGhdCnRneGvXJp1smc81JBil21oJxMWT2ekyao7hUrUNzWMGdrcge8W4qmmXeXHS/Ykc+YNabddaO/bVQy/vOclNcx0CJgxxIoX8cLa734d7jLalEx/1vg/puzpmFqvceR0r6YoK6SQhz/a6yX81h0ziwcoRFwLrOoYrEA0iWqeYSrZkoz9j1IWyyWkOjJ8K8/J9MsVBJGo0WVFs7QZ3zqYJettkHBp+XOeQ8OOgou8FTnc2KxeWPu77toyrYaxJVmo98GnPw+oCjyq8EXaF0RlKyBoAe0DuEIaihJOlSF86gp5pYtXO7m8HJqChkcnd++pen9W7qtuxaDLFfmTFK9hlVcMfJd/TY3n7MjolFzKOAW3GE8k8wCg9ltCqoPgE5OtzAlS64lWuS56OG3vX3fssZoMKtLlD9P4DoC8hhK/iQBZWCtcGpXiLD0ZuRfWgbhQngJ+b9PtQXeNez1a6XqFvIinYYgP3J4Z1Xfp96nrlvpd+9HZwOv0f3Pq+AnfT+Qw5s9wIPmri7hHBNbayuOn1IlEi+BqlE3RemNkOagZKDwY/q5MAooQnQ6PsD1lKSlPwQYkg4eZ0+ghFWyYMIvwcJfM+iKUQEMxWzThKBWvkzmoV8y9TFfUXPS/EPlvDjJYjiBSXjI5RIcq1PgPlsj3R8RuVswBT0ekKgydrvbKjIJs+ix4A+rotdiAP0hdbRowVNNZWAmNdCQsd2T7Qk4bl1+68ygJQM8oOMqWBo4dBu4kZko50ATRDpMbTtCfxisp8htaCIYkq0ZJnR5VDONc8EQX+anh7HC10lq/ZBPG83mQhFcdMnpN46wkA5T3e1mCyDmaT2iQZgCzksfe9TKj6jGbmAQJ+8VH3iFnRjAGJwkZrqpQD9+3igAHHaPvBptggYvigL/6St/S3UJ25urPmxEDkv7QiQNqIhasK5PQzpqtTTJRDxfADYqhVGiixDyC5F+XKYNZuLnPjMbR0GV7iEJaSQ3I43YPvnCTLcJXvvrO4+1BtPsug27MwvPDdEe36mpmmhkA5COXrVuVcfelvAFH4RArTGxAqGv2bDbCPKA/DsMnT7jvnwVAcCEeaSIfmUT/7krKUH9+mfvjC/uqLIivj7KdRYFniLdFBCHvF+Pm75T27wlbwab5KD9taBt/A/tq9Q9L9uRdfGPjYIYvgNEGCrCw=="
+    }
+  },
+  "callLog_info_submit": {
+    "desc": "上报通话记录",
+    "type": "POST",
+    "url": "/report/encryption-event",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "android",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "data": "tGrdt1P1j0dgP9B+1CEAH1KPB6H8vuLFPL7h8WD5F7qV0lupIxGYy+SIizePXL/EBuHN/3gLCsqrQjMu6SQ4DuVWMFwLc8asCSq8VggRtbWtTjHUThOZKxzgIS32a9IaAiXYycVQXZVFQVj4y8wIRtxmQWSK9oymJzz2xdBxUn0mXoZkhepno2Y1B9dLR7UIbgKRdV6hnonagaeErgj4u+CXqOC6Ity7peWRafCuClcURYoY57r2bykctfUihNtM8EDA5/MZ6dHltCxGof/XurKEOOKld4QcAwohDbPcO5w37ANUjJxzak0nQrVJeW/iI2ocMxxUeNaMzfHu214V43artBvjyp1RXS0pm2JnNSbN3LR8Byj47VwNf4v4sWeb0gRdRAazxvEO+ClVdq56aOqcUkEeHMBc5tT1riJp1DgldjzIzn8VJx1qapJ+y1ToyoPBmPPQ9b+RFBfFd+1befXTm6BbF6jp3I9QOEvI5tR0RCTyENee6lNSgbyR493ljkaKeX4UjRRCVFrJwgL+njvJe+HaatOUVJqIxR1LHoKTywOJ3mSSoQgCDcRYZ4yTi3xGtgOJLgMEauV7mmdpcDbgjo+A5Q0f1yzL/eN/DbYldOSpTmkAzssTSnbnulN4GnnwN6/QwQTTvZtrbS756pTiQIp7q24RoihyRMgIIAUs6iZMoGMOb12sztu8eRUqbdRKt2M34jU3jaRDxPvvMIX2mZEJdmfQCEX3v8VCx+wkMILcpPDUZCJxGnYTEe+yKkbrKFE+aPHnZGRvjaWqH1Ab3vqA2NPlKPKgdvSV60F/td1yyNhZL8EhUcy14rqkNODikCzByQLPlXY6WM/CSSiliqdhGdZCGN/CuRt0W4uN4lv56OJ0O2CaSzfvyY3I8t4rDam7kQLofIt7INluAEoUveoHqAnqTy3XQ1351q14de4l4ZVLB3X0p7KetlkMUzkem8JIU0TsqvSL9rkE21W0sKgCasMdjZAeQyxR2VEHGgvW8BfX+Mye2L3+mEiW"
+    }
+  },
+  "device_finger_info_submit": {
+    "desc": "上报设备指纹",
+    "type": "POST",
+    "url": "/report/device-fingerprinting",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "android",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "data": {
+        "base_band_version": "150_GEN_PACK-1.346133.1.349160.1,150_GEN_PACK-1.346133.1.349160.1",
+        "heap_allocation_percent": "8.54%",
+        "language": "zh",
+        "mcc": "460",
+        "wifiIp": "192.168.11.121",
+        "voice_mail": "12599",
+        "cpu_type": "AArch64 Processor rev 14 (aarch64)",
+        "total_internal_storage": "110.03G",
+        "dns_address": "202.96.209.133",
+        "host": "compiler0175",
+        "model": "V1838A",
+        "network_operator_name": "CMCC",
+        "release_version": "10",
+        "brand": "vivo",
+        "app_id": "xinyongfei",
+        "hardware": "qcom",
+        "radio_type": "LTE",
+        "cell_ip": "192.168.11.121",
+        "phone_type": "GSM",
+        "max_heap_size": "256Mb",
+        "heap_used_percent": "6.61%",
+        "tongdun_session_id": "eyJvcyI6ImFuZHJvaWQiLCJ2ZXJzaW9uIjoiMy42LjMiLCJwcm9maWxlX3RpbWUiOjQ3NCwiaW50ZXJ2YWxfdGltZSI6Njk2NjMsInBhY2thZ2VzIjoiY29tLnhpbnlvbmdmZWkueHlmIiwiY3NpZCI6IjE2MjAzNTgxODk0MjIxNzk3NTUiLCJ0b2tlbl9pZCI6IlgxV3RTMEEwaUpKTkJnaktwNm9CNlQ0YkJLd0tGT0dNUVVLVUloN2tjQ2NxZ3pDWjV0aVVVMG84QlFPbThSVldCbm1MS1IrTmdMNWtyZzlyQStVd0dnPT0ifQ==",
+        "biz_type": "xjd_activation",
+        "configuration_ssid": [
+          "\"13585212216\"",
+          "\"shoufuyou\"",
+          "\"Crystal\"",
+          "\"TP-LINK_E830C\""
+        ],
+        "source_type": "android",
+        "screen_resolution": "1080 x 2340",
+        "allow_mock_location": false,
+        "tags": "release-keys",
+        "battery_status": "DISCHARGING",
+        "battery_temperature": "28.5℃",
+        "apk_md5": "4bc1563491a8ff5b8d71492cdcd036f4",
+        "active_time": "70228546",
+        "cpu_hardware": " Qualcomm Technologies, Inc SM6150",
+        "proxy": "192.168.10.185:8888",
+        "sim_country_iso": "cn",
+        "up_time": "476197471",
+        "wifi_mac": "56:6B:D8:BC:72:7A",
+        "phone_number": "",
+        "baiqishi_session_id": "99941ab2-4f1d-45fd-89d9-1455a58c30cd",
+        "bssid": "a4:fa:76:30:5a:40",
+        "dhcp_server": "192.168.11.254",
+        "scan_ssid": [
+          "shoufuyou",
+          "shoufuyou_guest",
+          "shoufuyou",
+          "shoufuyou",
+          "shoufuyou_guest",
+          "shoufuyou",
+          "shoufuyou_guest",
+          "shoufuyou",
+          "shoufuyou_guest",
+          "shoufuyou_guest",
+          "shoufuyou",
+          "shoufuyou",
+          "shoufuyou",
+          "shoufuyou_guest",
+          "shoufuyou_guest",
+          "shoufuyou",
+          "shoufuyou",
+          "shoufuyou_guest",
+          "FANCYMAKER",
+          "shoufuyou_guest",
+          "same",
+          "FANCYMAKER",
+          "same"
+        ],
+        "sim_operator_name": "CMCC",
+        "ssid": "\"shoufuyou\"",
+        "release_version_int": "29",
+        "font_hash": "-861761207",
+        "uid": "10372",
+        "device_name": "PD1838",
+        "total_memory": "7588Mb",
+        "available_internal_storage": "86.34G",
+        "rooted": false,
+        "current_time": "1620358274308",
+        "is_emulator": false,
+        "rssi": "-43",
+        "mnc": "00",
+        "sim_operator": "46002",
+        "battery_level": "100",
+        "display": "QP1A.190711.020 release-keys",
+        "serial_number": "unknown",
+        "installed_applications": [
+          "好享借",
+          "畅行花",
+          "爱奇艺",
+          "美团",
+          "飞行卡",
+          "饿了么",
+          "信用飞(测试版)",
+          "恒易贷",
+          "趣前行(测试版)",
+          "微信",
+          "美团外卖",
+          "助力钱包贷款",
+          "钱有道",
+          "应用宝",
+          "百度",
+          "58同城",
+          "意见反馈",
+          "榕树贷款",
+          "趣享花(测试版)",
+          "叮咚买菜",
+          "QQ浏览器",
+          "拼多多",
+          "Chrome",
+          "UC浏览器",
+          "QQ",
+          "儿童模式",
+          "旺旺钱包",
+          "现金借款测试",
+          "去哪儿旅行",
+          "一键锁屏",
+          "融360",
+          "钉钉",
+          "智慧生活",
+          "任你用",
+          "阿里云",
+          "畅行花(测试版)",
+          "手机淘宝",
+          "支付宝"
+        ],
+        "time_zone": "中国标准时间",
+        "total_external_storage": "109.84G",
+        "sign_md5": "228e24d6d2c9bd3fad253e31de7ea4b3",
+        "network_country_iso": "cn",
+        "boot_time": "1619811848291",
+        "version_name": "4.3.2-TEST",
+        "brightness": "53",
+        "kernel_version": "4.14.117-perf+",
+        "package_name": "com.xinyongfei.xyf",
+        "available_memory": "340Mb",
+        "cpu_frequency": "1708800",
+        "android_id": "4142821aabcf5dd2",
+        "available_external_storage": "86.14G",
+        "network_type": "1",
+        "wifi_netmask": "0.0.0.0",
+        "gateway": "192.168.11.254"
+      }
+    }
+  },
+  "sms_info_submit": {
+    "desc": "上报短信",
+    "type": "POST",
+    "url": "/report/encryption-event",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "android",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "token": "{}"
+    },
+    "params": {
+      "data": "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"
+    }
+  },
+  "activation": {
+    "desc": "激活",
+    "type": "POST",
+    "url": "/before/activation",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "android",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "Device-Fingerprint": "{}",
+      "token": "{}"
+    },
+    "params": {
+    }
+  },
+  "detect_activation": {
+    "desc": "查询激活",
+    "type": "POST",
+    "url": "/before/detect-activation",
+    "header": {
+      "is": true,
+      "app-id": "{}",
+      "Content-Type": "application/json",
+      "source-type": "client",
+      "os": "android",
+      "version-code": "30503",
+      "utm-source": "{}",
+      "device-id": "{}",
+      "Device-Fingerprint": "{}",
+      "token": "{}"
+    },
+    "params": {
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
