@@ -89,7 +89,6 @@ class Xd_sql(object):
 
         risk_CashCreditLineApplyLog2 = "DELETE FROM shoufuyou_risk.CashCreditLineApplyLog2 WHERE id_card_number={}".format(id_num)
 
-        # user_del_sql, credit_del_sql,
         sql_list = [user_del_sql, credit_del_sql, Person_del_sql, cash_loan_ord, cash_loan_ord2, cash_apply,
                     Application2, Applicationlog, Applicationlog, o1, o2, userext, ocr_del_sql, face_del_sql, bank_card,
                     bank_record, cashlao, cashRepayment, cashque, cashbill, cashprofit, cashtrade, user_judge, fas_bank,

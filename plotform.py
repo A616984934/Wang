@@ -15,6 +15,7 @@ import redis_con
 
 xd = xindai_sql.Xd_sql()
 redis_con = redis_con.RedisConnect()
+op_sql = delete_sql.Open_plat()
 
 server = flask.Flask(__name__)
 CORS(server, supports_credentials=True)
@@ -83,50 +84,49 @@ def delete_restore():
         return "script fails"
     recognize_info = request.data.decode('utf-8')
     del_info = json.loads(recognize_info)
-
     mobile_num = del_info["account_num"]
     app_name = del_info["app_name"]
     account_status = del_info["account_status"]
     id_card = del_info["id_card"]
     env = del_info["account_env"]
 
-    # 删除信息  ${new_mobile}
-    res, re2 = '测试默认值', 'ss'
-    users_id = delete_sql.user_ids.format(mobile_num)
-    users_list = delete_sql.sql_open_plat.select_all_data(users_id)
-    print('此手机号相关的user_id', users_list[0].get("user_id"))
+    id_card_origin = ''
+    user_ids = op_sql.get_user_id(mobile_num)
+    print('=--------=', user_ids)
 
-    if len(users_list) == 0:
-        return jsonify({"message": '已经不存在此手机相关数据'})
-    else:
-        # 获取加密后的身份证号码
-        id_card_origin = delete_sql.get_id(users_list[0].get("user_id"), env=env)
-        if id_card == '无法获取到对应的原始身份证':
-            return u"失败"
+    if id_card == '' and len(user_ids) > 1:
+        id_card, id_card_origin = op_sql.get_id(user_ids[0], env=env, id_num=id_card)
+    elif id_card != '':
+        id_card_origin = op_sql.get_id_origin(id_num=id_card)
 
-    print('当前user_list-------{}'.format(users_list))
-    # mongo基本信息
-    for i in users_list:
-        users.append(i['user_id'])
+    try:
+        if account_status == '外部api':
+            mongo_del(id_card=id_card, id_card_origin="1234")
+            xd.all_v2_delete(id_card, mobile_num)
+            redis_con.delete("mobile:{}".format(mobile_num))
+            return "api--delete--success"
 
-    if account_status == '注册-贷前':
-        # 平台贷前sdk
-        res = delete_sql.del_before_platform(tuple(users) + (1, 2), mobile_num)
-        # 信贷sdk，需要详细划分/贷前落表或者贷中，贷后落笔
-        re2 = xd.before_xd(id_card, mobile_num)
-        mongo_del(id_card=id_card, id_card_origin=id_card_origin)
+        if account_status == '注册-贷前':
+            # 平台贷前sdk
+            res = op_sql.del_before_platform(tuple(users) + (1, 2), mobile_num)
+            # 信贷sdk，需要详细划分/贷前落表或者贷中，贷后落笔
+            re2 = xd.before_xd(id_card, mobile_num)
+            mongo_del(id_card=id_card, id_card_origin=id_card_origin)
 
-    # 删除进件信息：//贷中，贷后 --->删除信贷sdk--信贷全部信息
-    if account_status == '全节点删除':
-        res = delete_sql.del_after_platform(mobile_num)
-        res2 = delete_sql.del_before_platform(id_card, mobile_num)
-        res3 = xd.all_v2_delete(id_card, mobile_num)
-        redis_con.delete("jwt:{}:xyf01".format(mobile_num))
-        redis_con.delete("mobile:{}".format(mobile_num))
-        mongo_del(id_card=id_card, id_card_origin=id_card_origin)
+        # 删除进件信息：//贷中，贷后 --->删除信贷sdk--信贷全部信息
+        if account_status == '全节点删除':
+            res = op_sql.del_after_platform(mobile_num)
+            res2 = op_sql.del_before_platform(id_card, mobile_num)
+            res3 = xd.all_v2_delete(id_card, mobile_num)
+            redis_con.delete("jwt:{}:xyf01".format(mobile_num))
+            redis_con.delete("mobile:{}".format(mobile_num))
+            mongo_del(id_card=id_card, id_card_origin=id_card_origin)
 
-    print('删除账号信息结果', res, re2)
-    return jsonify({"message": u'delete_info 成功'})
+        return jsonify({"message": "delete_info Success"})
+    
+    except Exception as e:
+        print('出现异常,{}'.format(e))
+        return jsonify({"message": "Delete wrong"})
 
 
 @server.route("/redis", methods=['POST'])
@@ -211,3 +211,4 @@ def xxx():
 
 if __name__ == '__main__':
     server.run(debug=True, port=8050, host='0.0.0.0', threaded=True)  # 指定端口、host,0.0.0.0代表不管几个网卡，任何ip都可以访问
+

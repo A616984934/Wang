@@ -81,7 +81,7 @@ def id_card_get(servers,info):
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     rel_info = parse.urlencode(info)
     res1 = requests.post(servers, data=rel_info, headers=headers)
-    res = res1.json().get('data')['id_card_no']
+    res = res1.json().get('data')
     if res is None:
         message = "server connect wrong"
         return message
@@ -90,12 +90,6 @@ def id_card_get(servers,info):
         return message
 
 
-class Inet_server(object):
-    @staticmethod
-    def normal_post(servers, info):
-        # 普通类型请求
-        servers = ''
-        info = ''
 
 
 
