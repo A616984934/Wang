@@ -65,8 +65,8 @@ def server_post(server_name, info, task_name, tail=1):
 def form_model(servers, info):
     # 表单形式请求数据
     rel_info = MultipartEncoder(info)
-    headers = {"Content-Type": "application/form-data"}
-    res1 = requests.post(servers, data=rel_info,headers=headers)
+    # headers = {"Content-Type": "application/form-data"}
+    res1 = requests.post(servers, data=rel_info, headers={'Content-Type': rel_info.content_type})
     res = res1.text.encode('utf-8').decode('unicode_escape')
     if res is None:
         message = "server connect wrong"

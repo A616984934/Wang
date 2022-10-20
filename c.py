@@ -35,6 +35,33 @@ for i, v in enumerate(nums):
 print(ans)
 
 
+n = 2
+k = 10
+a_length = 2**n
+z = '0110'
+print(a_length)
+print(a_length % 4)
+x = k % 4
+print(x)
+
+
+res = 0
+while k:
+    print(k)
+ 
+    print('-----', k)
+
+
+
+
+
+
+
+# n = 2, k = 2
+
+
+
+
 
 
 

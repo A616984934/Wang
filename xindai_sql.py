@@ -19,7 +19,7 @@ class Xd_sql(object):
     def __init__(self, env='sit'):
         self.sql_v2 = mysql_con.OperateMysql(sfy_v2_db_info, t_env=env)
         self.sql_risk = mysql_con.OperateMysql(sfy_v2_db_risk, t_env=env)
-        # self.sql_fund = mysql_con.OperateMysql(sfy_v2_db_fund, t_env=env)
+        self.sql_fund = mysql_con.OperateMysql(sfy_v2_db_fund, t_env=env)
 
     def all_v2_delete(self, id_num, mobile):
         res = ""
@@ -206,6 +206,26 @@ class Xd_sql(object):
         id_card = self.sql_v2.select_first_data(order_user_id_card)['id_card_number']
 
         return user_id, id_card
+
+    def fund_repay(self, order_num, fund_source='hp_lz'):
+        """
+        重新还款状态
+        :param fund_source: 资金方，默认hp_lz
+        :param order_num:
+        :return:
+        """
+        fund_cash_repay_detail = ''
+        common_repay_push = "DELETE FROM shoufuyou_fund.fund_common_repay_push WHERE order_number ='{}'".format(
+            order_num)
+        if fund_source == 'hp_lz':
+            fund_cash_repay_detail = "DELETE FROM shoufuyou_fund.fund_hp_lz_repay_detail WHERE order_number ='{}'".format(order_num)
+
+        sql_list = [common_repay_push, fund_cash_repay_detail]
+        try:
+            for sql_item in sql_list:
+                self.sql_fund.del_data(sql_item)
+        except Exception as e:
+            print('删除失败,{}'.format(e))
 
 
 if __name__ == "__main__":

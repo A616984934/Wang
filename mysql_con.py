@@ -12,7 +12,7 @@ class DateEncoder(json.JSONEncoder):
 
 
 class OperateMysql(object):
-    def __init__(self, db, t_env='sit', port=3306):
+    def __init__(self, db, dbs_name='', t_env='sit', port=3306):
         """
         数据库初始化连接
         :param db: mysql_sql.py文件配置
@@ -20,12 +20,12 @@ class OperateMysql(object):
         """
 
         self.connect_interface_testing = pymysql.connect(
-            host="{}".format(ReadConfig(t_env).get_mysql("host")),
-            user="{}".format(ReadConfig(t_env).get_mysql("user")),
-            passwd="{}".format(ReadConfig(t_env).get_mysql("password")),
-            port=port,
+            host="{}".format(ReadConfig(db_name=dbs_name, env=t_env).get_mysql("host")),
+            user="{}".format(ReadConfig(db_name=dbs_name, env=t_env).get_mysql("user")),
+            passwd="{}".format(ReadConfig(db_name=dbs_name, env=t_env).get_mysql("password")),
+            port=int("{}".format(ReadConfig(db_name=dbs_name, env=t_env).get_mysql("port"))),
             database="{}".format(db),
-            charset='{}'.format(ReadConfig(t_env).get_mysql("charset")),
+            charset='{}'.format(ReadConfig(db_name=dbs_name, env=t_env).get_mysql("charset")),
             cursorclass=pymysql.cursors.DictCursor
         )
 
@@ -110,7 +110,6 @@ class OperateMysql(object):
         """
         新增数据
         """
-
         try:
             self.connect_interface_testing.ping(reconnect=True)
             logging.info("mysql执行sql:{}".format(sql))
@@ -118,7 +117,6 @@ class OperateMysql(object):
             self.cursor_interface_testing.execute(sql)
             self.connect_interface_testing.commit()
             res = {data, '新增成功'}
-
 
         except Exception as e:
             res = {'新增失败', e}

@@ -6,8 +6,9 @@ from Port_info import appConf
 class ReadConfig:
     """定义一个读取配置文件的类"""
 
-    def __init__(self, env='sit', filepath=None):
+    def __init__(self, db_name='', env='sit', filepath=None):
         self.env = env
+        self.db_name = db_name
         if filepath:
             self.configPath = filepath
         else:
@@ -75,6 +76,8 @@ class ReadConfig:
         :return:
         """
         sql_db = "Sit-Mysql"
+        if self.db_name == 'fund':
+            sql_db = "Sit-Mysql-fund"
         if self.env == 'qa1':
             sql_db = "Qa1-Mysql"
         if param in self.get_option(sql_db):

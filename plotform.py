@@ -12,6 +12,7 @@ import delete_sql, xindai_sql
 from mongo_sql import mongo_del
 import mongo_con
 import redis_con
+import server_info
 
 xd = xindai_sql.Xd_sql()
 redis_con = redis_con.RedisConnect()
@@ -127,6 +128,38 @@ def delete_restore():
     except Exception as e:
         print('出现异常,{}'.format(e))
         return jsonify({"message": "Delete wrong"})
+
+
+@server.route("/restore_order", methods=['POST'])
+def order_restore():
+    order_info = json.loads(request.data.decode('utf-8'))
+    order_type = order_info["type"]
+    date_params = order_info["date_params"]
+    order_num = order_info["order_num"]
+    order_env = order_info["order_env"]
+    order_name = '预设值'
+    res = ''
+    if order_type == '重新还款':
+        order_name = 'init'
+        xd.fund_repay(order_num=order_num)
+
+    elif order_type == "还款日期":
+        order_name = 'start_time'
+
+    elif order_type == "删除订单":
+        # 添加删除所有订单
+        return jsonify({"message": "delete order success"})
+    try:
+        # 'param': date_params,
+        order_detail = {
+            'type': order_name,
+            'order_number': order_num,
+            'param': date_params
+        }
+        res = server_info.form_model(order_restore, order_detail).encode('raw_unicode_escape').decode('utf-8')
+        return jsonify({"message": " order restore success"})
+    except Exception as e:
+        print('wrong because %s' % e)
 
 
 @server.route("/redis", methods=['POST'])
