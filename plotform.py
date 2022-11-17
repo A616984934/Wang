@@ -38,6 +38,17 @@ new_dict = {"java_test": java_test, "php_test1": php_test1, "php_test2": php_tes
             "sit_php_1": sit_php_1, "sit_python_1": sit_python_1}
 
 
+def redis_del_all(mobile_num):
+    try:
+        for app_name in ['cxh', 'fxk', 'xbt', 'xyf', 'xyf01', 'lqqx']:
+            redis_con.delete("jwt:{}:{}".format(mobile_num, app_name))
+        redis_con.delete("mobile:{}".format(mobile_num))
+        return "delete_info Success"
+    except Exception as e:
+        print(e)
+        return u"redis_delete wrong"
+
+
 def command_exec_ext(command, timeout=5, cwd=None, wait=True):
     try:
         comp = subprocess.run(command, timeout=timeout,
@@ -104,6 +115,7 @@ def delete_restore():
         if account_status == '外部api':
             mongo_del(id_card=id_card, id_card_origin="1234")
             xd.all_v2_delete(id_card, mobile_num)
+            redis_con.delete("jwt:{}:{}".format(mobile_num, app_name))
             redis_con.delete("mobile:{}".format(mobile_num))
             return "api--delete--success"
 
@@ -119,8 +131,7 @@ def delete_restore():
             res = op_sql.del_after_platform(mobile_num)
             res2 = op_sql.del_before_platform(id_card, mobile_num)
             res3 = xd.all_v2_delete(id_card, mobile_num)
-            redis_con.delete("jwt:{}:xyf01".format(mobile_num))
-            redis_con.delete("mobile:{}".format(mobile_num))
+            redis_del_all(mobile_num)
             mongo_del(id_card=id_card, id_card_origin=id_card_origin)
 
         return jsonify({"message": "delete_info Success"})
@@ -173,7 +184,6 @@ def redis_api():
     hash_name = xx['hash_name']
     key = xx['key']
     value = xx['value']
-
     try:
         # 通道
         pool = redis.ConnectionPool(host="redis.testxinfei.cn", port=6379, password='#8keAh!dF%PZedAIShr72n',
@@ -228,7 +238,6 @@ def mongo_con():
         re1 = mongo_conn.delete(aim_data)
     if meth == "find":
         re1 = mongo_conn.find(aim_data)
-
     if meth == "updated" and old != "":
         re1 = mongo_conn.update(org_data=old, new_data=aim_data)
     if meth == "created":

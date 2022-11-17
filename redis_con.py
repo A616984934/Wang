@@ -27,7 +27,6 @@ class RedisConnect(object):
     def delete(self, key):
         """直接根据key删除整个值"""
         result = self.conn.keys()
-        print('ssss', result)
         # if bytes(key, encoding="utf-8") in result:
         if key in result:
             # self.conn.hdel(key, vaule) 只根据字典删除部分满足键值对

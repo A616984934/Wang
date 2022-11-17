@@ -19,7 +19,7 @@ class Xd_sql(object):
     def __init__(self, env='sit'):
         self.sql_v2 = mysql_con.OperateMysql(sfy_v2_db_info, t_env=env)
         self.sql_risk = mysql_con.OperateMysql(sfy_v2_db_risk, t_env=env)
-        self.sql_fund = mysql_con.OperateMysql(sfy_v2_db_fund, t_env=env)
+        self.sql_fund = mysql_con.OperateMysql(sfy_v2_db_fund, dbs_name='fund', t_env=env)
 
     def all_v2_delete(self, id_num, mobile):
         res = ""
